@@ -1,30 +1,40 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Statistics
 {
-    public class Stats
+    
+    public class List<T>: System.Collections.Generic.List<___>
     {
-        public float average(List<float> numbers)
-        {
-            float avg = 0;
-            int count = 0;
-            foreach(float num in numbers)
-            {
-                avg = avg + num;
-                count++;
-            }
 
-            return avg/count;
-        }
     }
+
+    public struct ___ :
+
+    }
+
     public class StatsComputer
     {
-        public Stats CalculateStatistics(List<float> numbers) {
+        public Stats CalculateStatistics(List<___> numbers)
+        {
             //Implement statistics here
-
-            Stats stats = new Stats();
+            Stats stats = new Stats(numbers);
             return stats;
         }
+        public class Stats
+        {
+            public Stats(List<___> numbers)
+            {
+
+            }
+        }
+         
+        
     }
+
 }
+
+
+
+
