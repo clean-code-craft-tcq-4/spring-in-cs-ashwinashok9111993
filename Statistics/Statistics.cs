@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Statistics
 {
-    public class Stats()
+    public class Stats
     {
         
     }
