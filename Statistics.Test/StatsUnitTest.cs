@@ -27,6 +27,9 @@ namespace Statistics.Test
             //All fields of computedStats (average, max, min) must be
             //Double.NaN (not-a-number), as described in
             //https://docs.microsoft.com/en-us/dotnet/api/system.double.nan?view=netcore-3.1
+            Assert.True(float.IsNaN(statsComputer.average));
+            Assert.True(float.IsNaN(statsComputer.max));
+            Assert.True(float.IsNaN(statsComputer.min));
         }
         [Fact]
         public void RaisesAlertsIfMaxIsMoreThanThreshold()
