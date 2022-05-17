@@ -3,19 +3,34 @@ using System.Collections.Generic;
 
 namespace Statistics
 {
-    public class EmailAlert:IAlerter
+    public class EmailAlert : IAlerter
     {
         public bool emailSent;
+        public bool status
+        {
+            get => emailSent;
+            set => emailSent = value;
+        }
     }
 
-    public class LEDAlert:IAlerter
+    public class LEDAlert : IAlerter
     {
         public bool ledGlows;
+
+        public bool status
+        {
+            get => ledGlows;
+            set => ledGlows = value;
+        }
     }
 
     public interface IAlerter
     {
-
+        bool status
+        {
+            set;
+            get;
+        }
     }
 
     public class StatsAlerter
@@ -31,10 +46,18 @@ namespace Statistics
 
         public void checkAndAlert(List<float> numbers)
         {
-
+            var statsComputer = new StatsComputer();
+            var computedStats = statsComputer.CalculateStatistics(numbers);
+            if(statsComputer.max > maxThreshold)
+            {
+                foreach (IAlerter alert in alerters)
+                {
+                    alert.status = true;
+                }
+            }
         }
     }
-    public class Stats 
+    public class Stats
     {
         public float average = 0;
         public float max = 0;
@@ -51,13 +74,13 @@ namespace Statistics
 
             if (numbers.Count == 0)
             {
-               
+
             }
             else
             {
-                
+
                 float sum = 0;
-                foreach(float num in numbers)
+                foreach (float num in numbers)
                 {
                     sum = sum + num;
                 }
@@ -68,12 +91,8 @@ namespace Statistics
                 max = numbers[numbers.Count - 1];
 
             }
-
             return stats;
-
         }
-    
-        
     }
 
 }
