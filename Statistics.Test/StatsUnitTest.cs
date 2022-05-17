@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using Statistics;
+using System.Collections.Generic;
 
 namespace Statistics.Test
 {
@@ -11,21 +12,24 @@ namespace Statistics.Test
         {
             var statsComputer = new StatsComputer();
             var computedStats = statsComputer.CalculateStatistics(
-                new List<___>{1.5, 8.9, 3.2, 4.5});
+                new List<float>{1.5f, 8.9f, 3.2f, 4.5f});
             float epsilon = 0.001F;
-            Assert.True(Math.Abs(statsComputer.average - 4.525) <= epsilon);
-            Assert.True(Math.Abs(statsComputer.max - 8.9) <= epsilon);
-            Assert.True(Math.Abs(statsComputer.min - 1.5) <= epsilon);
+            Assert.True(Math.Abs(statsComputer.average - 4.525f) <= epsilon);
+            Assert.True(Math.Abs(statsComputer.max - 8.9f) <= epsilon);
+            Assert.True(Math.Abs(statsComputer.min - 1.5f) <= epsilon);
         }
         [Fact]
         public void ReportsNaNForEmptyInput()
         {
             var statsComputer = new StatsComputer();
             var computedStats = statsComputer.CalculateStatistics(
-                new List<___>{});
+                new List<float>{});
             //All fields of computedStats (average, max, min) must be
             //Double.NaN (not-a-number), as described in
             //https://docs.microsoft.com/en-us/dotnet/api/system.double.nan?view=netcore-3.1
+            Assert.True(float.IsNaN(statsComputer.average));
+            Assert.True(float.IsNaN(statsComputer.max));
+            Assert.True(float.IsNaN(statsComputer.min));
         }
         [Fact]
         public void RaisesAlertsIfMaxIsMoreThanThreshold()
@@ -34,9 +38,9 @@ namespace Statistics.Test
             var ledAlert = new LEDAlert();
             IAlerter[] alerters = {emailAlert, ledAlert};
 
-            const float maxThreshold = 10.2;
+            const float maxThreshold = 10.2f;
             var statsAlerter = new StatsAlerter(maxThreshold, alerters);
-            statsAlerter.checkAndAlert(new List<___>{0.2, 11.9, 4.3, 8.5});
+            statsAlerter.checkAndAlert(new List<float> { 0.2f, 11.9f, 4.3f, 8.5f }); 
 
             Assert.True(emailAlert.emailSent);
             Assert.True(ledAlert.ledGlows);
