@@ -74,7 +74,9 @@ namespace Statistics
 
             if (numbers.Count == 0)
             {
-
+                average = float.NaN;
+                max = float.NaN;
+                min = float.NaN;
             }
             else
             {
